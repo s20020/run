@@ -4,19 +4,68 @@
     <meta charset="UTF-8">
     <title>RUN</title>
     <style>
-
+        * { padding: 0; margin: 0; }
+        canvas { background: #000000; display: block; margin: 0 auto; }
 
     </style>
 </head>
 <body>
+
+<canvas id="myCanvas" width="1000" height="600"></canvas>
   <script>
-    document.write(`<img  src="asetts/img_1.png" width="200" height="auto">`);
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+
+
+
+      ballRadius = 10
+      var x = canvas.width/2;
+      var y = canvas.height/2
+
+      //マウスで動かすためのイベントリスナーの設定
+      document.addEventListener("mousemove", mouseMoveHandler, false);
+
+    //ボール
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI*2, false);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    drawBall()
 
     document.addEventListener('keydown', key_ivent);
 
-    function
+    function key_ivent(e) {
+        if(e.code === 'Enter'){
 
+        }
+    }
+
+      function mouseMoveHandler(e) {
+          var mX = e.pageX
+          var mY = e.pageY
+
+          x = mX
+          y = mY
+          ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+          drawBall()
+
+          document.getElementById("txtX").value = mX;
+          document.getElementById("txtY").value = mY;
+      }
+
+      function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+      }
+
+      var interval = setInterval(draw, 100);
   </script>
+
+X座標：<input type="text" id="txtX" />
+Y座標：<input type="text" id="txtY" />
 
 </body>
 </html>
